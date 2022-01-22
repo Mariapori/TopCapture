@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Robot;
 import java.awt.Toolkit;
+import javax.swing.SwingConstants;
 
 public class Formi1 extends JFrame {
 
@@ -49,20 +50,18 @@ public class Formi1 extends JFrame {
 	 * Create the frame.
 	 */
 	public Formi1() {
+		setResizable(false);
 		setTitle("TopCapture");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 300, 100);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		JCheckBox chckbxKokoNytt = new JCheckBox("Koko näyttö");
-		contentPane.add(chckbxKokoNytt, BorderLayout.WEST);
-		
-		JCheckBox chckbxTiettyIkkuna = new JCheckBox("Tietty ikkuna");
-		chckbxTiettyIkkuna.setEnabled(false);
-		contentPane.add(chckbxTiettyIkkuna, BorderLayout.CENTER);
+		chckbxKokoNytt.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(chckbxKokoNytt, BorderLayout.CENTER);
 		
 		Button button = new Button("Kaappaa kuva");
 		button.addActionListener(new ActionListener() {
@@ -81,7 +80,7 @@ public class Formi1 extends JFrame {
 						 
 						if (userSelection == JFileChooser.APPROVE_OPTION) {
 						    File fileToSave = fileChooser.getSelectedFile();
-						    fileToSave = new File(fileToSave.toString() + ".png");
+						    fileToSave = new File(fileToSave.toString().replace(".png", "") + ".png");
 						    try {
 								ImageIO.write(image, "png", fileToSave);
 							} catch (IOException e) {
@@ -93,10 +92,6 @@ public class Formi1 extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}				
-				}
-				
-				if(chckbxTiettyIkkuna.isSelected()) {
-					
 				}
 			}
 		});
